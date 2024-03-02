@@ -1,0 +1,17 @@
+/* .hero{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(13, 202, 240, 0.801);
+}
+
+.heroInfo{
+    width:72%;
+    height: 82%;
+    background-image: url(src/public/hero.jpg);
+    background-size: cover;
+    background-position:center;
+   
+} */
