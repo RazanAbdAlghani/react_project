@@ -9,9 +9,8 @@ function Home() {
     <>
       <Hero />
       <div className='container d-felx justify-content-around'>
-       <SwiperCategories />
+        <SwiperCategories />
       </div>
-   
     </>
   )
 }

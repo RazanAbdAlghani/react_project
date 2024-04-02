@@ -1,13 +1,16 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import { object, string } from 'yup';
 import { Bounce, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Styles from './SignIn.module.css'
+import { UserContext } from '../../context/User';
+import Image from '../../../public/hero1.jpg';
 
 function SignIn() {
   const navigate = useNavigate();
-
+  const {setUserToken}= useContext(UserContext);
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -59,7 +62,7 @@ function SignIn() {
         });
 
         if (data.message == "success") {
-          toast.success('Log in succesfully ', {
+          toast.success('Login successfully', {
             position: "bottom-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -67,12 +70,13 @@ function SignIn() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "colored",
+            theme: "dark",
             transition: Bounce,
-          });
+            });
         navigate("/");
 
         localStorage.setItem("userToken", data.token);
+        setUserToken(data.token);
         }
       } catch (error) {
 console.log(error);
@@ -98,19 +102,28 @@ console.log(error);
 
   return (
     <>
+    <div className={Styles.bg} style={{ backgroundImage: `url(${Image})` }}>
+    <div className={Styles.login}>
       <h2>Log in</h2>
-      <div className='container-contact100'>
         <form onSubmit={handleSubmit}>
-          <label>email</label>
-          <input className="form-control" type="text" name="email" value={user.email} onChange={handleChange} />
-          <p>{errors.email}</p>
-          <label>password</label>
-          <input className="form-control" type="text" name="password" value={user.password} onChange={handleChange} />
-          <p>{errors.password}</p>
-         
+        <div className={Styles.wrapInput}>
+          <label className={Styles.labelInput}>email</label>
+          <input className={Styles.inp} type="text" name="email" value={user.email} onChange={handleChange} placeholder='Enter your email address'/>
+          <p className='text-danger'>{errors.email}</p>
+          </div>
 
-          <button type="submit" disabled={loader ? 'disabled' : null}>{loader ? "wait..." : "submit"}</button>
+          <div className={Styles.wrapInput}>
+          <label className={Styles.labelInput}>password</label>
+          <input className={Styles.inp} type="password" name="password" value={user.password} onChange={handleChange} placeholder='Enter your password'/>
+          <p className='text-danger'>{errors.password}</p>
+          </div>
+
+          <button type="submit" className={Styles.loginBtn} disabled={loader ? 'disabled' : null}>{loader ? "wait..." : "submit"}</button>
+          <div className="mt-4">
+          <Link className="p-5 mt-5" to="/sendcode">Forget password?</Link>
+          </div>
         </form>
+      </div>
       </div>
     </>
   )

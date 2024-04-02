@@ -1,51 +1,38 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useResource from '../../hooks/useResource';
+import Loader from '../../components/Loader/component/Loader';
+import Styles from './Categories.module.css';
 function Categories() {
+  const navigate = useNavigate();
+  const { categories, error, loader } = useResource(`${import.meta.env.VITE_API_URL}/categories/active?page=1&limit=9`);
 
-  const [Categoriess, setCategories] = useState([]);
-  const getData = async () => {
-    const response = await fetch(`https://ecommerce-node4.vercel.app/categories/`);
-    const data = await response.json();
-    console.log(data.categories);
-    setCategories(data.categories);
-  }
-  useEffect(() => {
-    getData();
-  }, []);
+  if (loader) {
+    return <Loader />
+  };
 
   return (
     <>
-      {Categoriess.map((category) => (
-        <Link key={category._id}   >
-          <div className="row row-cols-1 row-cols-md-2 g-4 ">
-            <div className="col">
-              <div className="card ">
-                <img
-                  src={category.image.secure_url}
-                  className="card-img-top"
-                  alt="category image"
-                />
-                <div className="card-body">
-                  {/* <h5 className="card-title">{category.name}</h5> */}
-                  {/* <Link to='/products '  params={{ id: category._id }}>Details</Link> */}
-                  <Link
-
-                    className="btn btn-outline-secondary"
-                  >
-                    Show more
-                  </Link>
-
-                  {/* <Link to={/products/category/${category._id}}>Link Text</Link> */}
-
-                  {/* <Link to='/Details?id=${category._id}'>Details</Link> */}
-
-                  {/* <a href='details.jsx?id=${category._id}'>get details</a> */}
+      {error ?? <p>{error}</p>}
+      <div className={`${Styles.bg} container`}>
+        <h2 className="mb-0 mt-5 fs-lg">All Categouries</h2>
+        <div className={Styles.categoriesList} >
+          <div className='row d-flex justify-content-center column-gap-3 row-gap-5'>
+            {categories.map(category =>
+              <div className="col-4 p-1 shadow d-felx justify-content-center align-item-center bg-body-tertiary rounded" style={{ height: "370px", width: "250px" }} key={category.id}>
+                <img src={category.image.secure_url} className={Styles.cardImg} alt="..." />
+                <div className="card-body text-center d-flex flex-column align-items-center gap-1">
+                  <h5 className="card-title fs-5">{category.name}</h5>
+                  <div className="d-flex justify-content-center">
+                    <Link to={`/products/category/${category.id}`} className={Styles.btn} onClick={() => localStorage.setItem("category", category.name)}>Details</Link>
+                  </div>
                 </div>
               </div>
-            </div>
+
+            )}
           </div>
-        </Link>
-      ))}
+        </div>
+      </div>
     </>
   );
 }

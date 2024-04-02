@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -13,35 +13,18 @@ import Styles from './SwiperCategories.module.css'
 import { Navigation, Pagination, Scrollbar, Autoplay, EffectCoverflow } from 'swiper/modules';
 import Loader from '../../components/Loader/component/Loader';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../context/User';
+import useResource from '../../hooks/useResource';
 
 function SwiperCategories() {
-
-  const [categories, setCategories] = useState([]);
-  const [loader, setLoader] = useState(true);
-  const [error, setError] = useState('');
-
-  const getCategories = async () => {
-    try {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/categories/active?page=1&limit=9`);
-      // console.log(data.categories);
-      setCategories(data.categories);
-    } catch {
-      console.log(error);
-      setError('Error to Loade Data!');
-    } finally {
-      setLoader(false);
-    }
-  }
-
-  useEffect(() => {
-    getCategories();
-  }, []);
-
+  const { userName } = useContext(UserContext);
+  const { categories, error, loader } = useResource(`${import.meta.env.VITE_API_URL}/categories/active?page=1&limit=9`);
   if (loader) {
     return <Loader />
   }
   return (
     <>
+      <h2 className='fs-1 p-4'>Welcome {userName} !</h2>
       {error ?? <p>{error}</p>}
       <Swiper
         slidesPerView={3}
@@ -77,22 +60,22 @@ function SwiperCategories() {
           </SwiperSlide>
         )}
       </Swiper>
-
+      <h2 className="mt-5 pt-3 fs-1">All Categouries</h2>
       <div className={Styles.categoriesList} >
-        {categories.map(category =>
-          <div className={`card d-flex w-75 flex-row p-3 justify-content-center ${Styles.card}`} key={category.id}>
-            <img src={category.image.secure_url} className={Styles.cardImg} alt="..." />
-            <div className="card-body d-flex flex-column justify-content-center gap-3">
-              <h5 className="card-title fs-2">{category.name}</h5>
-              <Link to={`products/category/${category.id}`} className={`btn btn-primary bg-dark-subtle border-0 p-2 d-flex align-items-center btn-sm w-25 justify-content-center`}>Details</Link>
+        <div className='row d-flex justify-content-center column-gap-3 row-gap-4'>
+          {categories.map(category =>
+            <div className="col-4 p-1 shadow d-felx justify-content-center align-item-center" style={{ height: "370px", width: "250px" }} key={category.id}>
+              <img src={category.image.secure_url} className={Styles.cardImg} alt="..." />
+              <div className="card-body text-center d-flex flex-column align-items-center gap-1">
+                <h5 className="card-title fs-5">{category.name}</h5>
+                <div className="d-flex justify-content-center">
+                  <Link to={`products/category/${category.id}`} className={Styles.btn} onClick={() => localStorage.setItem("category", category.name)}>Details</Link>
+                </div>
+              </div>
             </div>
-          </div>
-
-        )}
+          )}
+        </div>
       </div>
-
-
-
     </>
   )
 }

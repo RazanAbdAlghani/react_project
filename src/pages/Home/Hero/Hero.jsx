@@ -1,15 +1,16 @@
 import React from 'react'
 import Styles from './Hero.module.css'
+import Image from '../../../../public/hero1.jpg'
+import { Link } from 'react-router-dom'
 function Hero() {
   return (
     <>
-      <div className={Styles.hero}>
-        <div className={`${Styles.heroInfo} rounded d-flex flex-column p-5 justify-content-center gap-3`}>
-          <h1>ONLINE<span>SHOPPING</span></h1>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni aperiam cum blanditiis laboriosam molestiae quis quibusdam nisi exercitationem, ad corporis!</p>
-          <button className={Styles.btn}><a href="#">Log in</a></button>
+      <section>
+        <div className={Styles.hero} style={{ backgroundImage: `url(${Image})` }}>
+          <h1 className="d-flex flex-wrap">O N L I N E <span className="ms-3"> S H O P P I N G</span></h1>
+          <p className="d-flex flex-wrap">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
         </div>
-      </div>
+      </section>
     </>
 
   )

@@ -5,6 +5,7 @@ import { object, string } from 'yup';
 import { Bounce, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Styles from './SignUp.module.css'
+import Image from '../../../public/hero1.jpg';
 
 function SignUp() {
   const navigate = useNavigate();
@@ -117,10 +118,10 @@ function SignUp() {
 
   return (
     <>
-      <div className={Styles.bg}>
+      <div className={Styles.bg} style={{ backgroundImage: `url(${Image})` }}>
         <div className={Styles.register}>
-          <h2 className={`d-block text-center fs-1 text-dark pb-4`}>Register</h2>
-          <form onSubmit={handleRegister} className={Styles.styleForm}>
+          <h2>Sign Up</h2>
+          <form onSubmit={handleRegister}>
             <div className={Styles.wrapInput}>
               <label className={Styles.labelInput}>user Name</label>
               <input className={Styles.inp} type="text" name="userName" value={user.userName} onChange={handleChange} placeholder='Enter your name' />
@@ -141,7 +142,7 @@ function SignUp() {
               <input className="form-control" type="file" name="image" onChange={handleImageChange} />
             </div>
             <div className='d-flex justify-content-center'>
-              <button type="submit" className={Styles.registerBtn} disabled={loader ? 'disabled' : null}>{loader ? "wait..." : "register"}</button>
+              <button type="submit" className={Styles.registerBtn} disabled={loader ? 'disabled' : null}>{loader ? "wait..." : "submit"}</button>
             </div>
           </form>
         </div>

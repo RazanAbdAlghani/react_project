@@ -1,0 +1,38 @@
+
+h5{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+
+}
+.singleProd{
+    width: calc(100% /5);
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 8.237px 8.237px 0px rgba(0, 0, 0, 0.10);
+    position: relative;
+}
+.btn {
+    border: 0;
+    background-color: #666666e5;
+    width:140px;
+    border-radius: 20px;
+    padding: 8px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .btn:hover {
+    background-color: #562e10;
+  }
+  
+
+.cardHov:hover{
+   cursor: pointer;
+   margin-top: 2px;
+}

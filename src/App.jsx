@@ -12,10 +12,17 @@ import SignUp from './pages/SignUp/SignUp';
 import Products from './pages/Products/Products';
 import Cart from './pages/Cart/Cart';
 import NotFound from './components/NotFound/NotFound';
-import Profile from './pages/Profile/Profile';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
-import ProductsWithCategory from './pages/ProductsWithCategory';
+import ProductsWithCategory from './pages/CategoryProducts/ProductsWithCategory';
 import Product from './pages/Product/Product';
+import UserContextProvider from './context/User';
+import SendCode from './pages/SendCode/SendCode';
+import ForgetPassword from './pages/ForgetPassword/ForgetPassword';
+import Order from './pages/Order/Order';
+import User from './routes/User/User';
+import Profile from './pages/Profile/Profile';
+import OrdersDetailes from './pages/Profile/OrdersDetailes';
+import Contact from './pages/Profile/Contact';
 
 const router = createBrowserRouter([
   {
@@ -25,13 +32,28 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />
+
       },
       {
         path: "/profile",
         element:
           <ProtectedRoutes>
-            <Profile />
-          </ProtectedRoutes>
+            <User />
+          </ProtectedRoutes>,
+        children: [
+          {
+            path: "/profile",
+            element: <Profile />
+          },
+          {
+            path: "/profile/contact",
+            element: <Contact />
+          },
+          {
+            path: "/profile/order",
+            element: <OrdersDetailes />
+          },
+        ]
       },
       {
         path: "/categories",
@@ -46,12 +68,20 @@ const router = createBrowserRouter([
         element: <SignUp />
       },
       {
+        path: "/sendcode",
+        element: <SendCode />
+      },
+      {
+        path: "/forgetPass",
+        element: <ForgetPassword />
+      },
+      {
         path: "/products",
         element: <Products />
       },
       {
         path: "/products/category/:id",
-        element: <ProductsWithCategory/>
+        element: <ProductsWithCategory />
       },
       {
         path: "/products/:product_id",
@@ -62,6 +92,13 @@ const router = createBrowserRouter([
         element:
           <ProtectedRoutes>
             <Cart />
+          </ProtectedRoutes>
+      },
+      {
+        path: "/order",
+        element:
+          <ProtectedRoutes>
+            <Order />
           </ProtectedRoutes>
       },
       {
@@ -77,7 +114,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <UserContextProvider>
+        <RouterProvider router={router} />
+      </UserContextProvider>
       <ToastContainer />
     </>
   )

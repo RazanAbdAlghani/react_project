@@ -1,0 +1,16 @@
+.card {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+    border: none;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.userImage {
+    display: flex;
+    border-radius: 50%;
+    box-shadow: 0 0 50px #ccc;
+    margin-top: 15px;
+    width: 200px;
+}
