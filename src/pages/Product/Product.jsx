@@ -53,8 +53,8 @@ function Product() {
         }
       });
       // console.log(data);
-      setTotalPrice(totalPrice + price);
-      setCount(count + 1);
+      localStorage.setItem("countNum", data.cart.products.length);
+      setCount(data.cart.products.length);
     } catch (error) {
       toast.error(error.response.data.message, {
         position: "bottom-center",
@@ -119,7 +119,7 @@ function Product() {
                   <span className='text-dark text-decoration-line-through'>{product.price}</span>
                   <span>{product.finalPrice}</span>$
                 </div>
-                {<Rating index={rating} size={30}/>}
+                {<Rating index={rating} size={30} />}
                 <div className={Styles.description}>
                   <h3>Description</h3>
                   {product.description}
@@ -130,7 +130,7 @@ function Product() {
                   null
                 }
                 {/*reviews section*/}
-                <Reviews productId={product._id}/>
+                <Reviews productId={product._id} />
               </div>
             </>
           }
