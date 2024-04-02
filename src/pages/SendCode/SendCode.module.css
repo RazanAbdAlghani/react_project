@@ -1,3 +1,17 @@
+.card {
+    z-index: 1;
+    border-radius: 5px;
+    background: rgb(249, 249, 249);
+    overflow: hidden;
+    padding: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 30rem;
+}
 
 .bg {
     width: 100%;
@@ -9,12 +23,15 @@
     align-items: center;
     padding: 15px;
     position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-.bg::before{
+
+.bg::before {
     content: "";
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     bottom: 0;
     right: 0;
     width: 100%;
@@ -24,13 +41,13 @@
 
 
 
-.login{
+.login {
     z-index: 1;
     width: 500px;
     border-radius: 5px;
     background: rgb(249, 249, 249);
     overflow: hidden;
-    padding:  45px;
+    padding: 45px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     text-align: center;
 }
@@ -40,7 +57,7 @@
     border-bottom: 2px solid #d9d9d9;
     padding-bottom: 13px;
     margin-bottom: 27px;
-    text-align:start;
+    text-align: start;
 }
 
 
@@ -72,4 +89,10 @@
 
 .loginBtn:hover {
     background-color: #562e10;
+}
+
+@media (max-width: 575.98px) {
+    .card {
+        width: 20rem;
+    }
 }

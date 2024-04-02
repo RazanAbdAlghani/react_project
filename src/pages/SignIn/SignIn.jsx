@@ -103,8 +103,8 @@ console.log(error);
   return (
     <>
     <div className={Styles.bg} style={{ backgroundImage: `url(${Image})` }}>
-    <div className={Styles.login}>
-      <h2>Log in</h2>
+    <div className={`${Styles.login} card`}>
+      <h2 className="fs-lg">Log in</h2>
         <form onSubmit={handleSubmit}>
         <div className={Styles.wrapInput}>
           <label className={Styles.labelInput}>email</label>

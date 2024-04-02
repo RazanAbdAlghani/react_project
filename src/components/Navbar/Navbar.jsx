@@ -15,7 +15,7 @@ function Navbar() {
   };
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-body p-0 sticky-top shadow flex-nowrap" >
+      <nav className="navbar navbar-expand-lg navbar-light bg-body p-0 pe-3 sticky-top shadow flex-nowrap" >
         <div className="container-fluid justify-content-around gap-5">
           <Link className="navbar-brand m-3 d-flex align-items-center" to="#"><img className="img-thumbnail border-0" src={Logo} />
             <span className="fw-bold fs-3 ms-3" style={{ color: `#562e10` }}>T - Shop</span>
@@ -85,8 +85,10 @@ function Navbar() {
               </>
               :
               <>
-                <Link className="btn  p-2 d-flex align-items-center btn-outline-warning" to="/login">Log in</Link>
-                <Link className="btn  p-2 d-flex align-items-center btn-warning" to="/signUp">Sign up</Link>
+                <div className="d-flex gap-2 flex-wrap">
+                  <Link className="btn  p-2 d-flex align-items-center btn-outline-warning" to="/login">Log in</Link>
+                  <Link className="btn  p-2 d-flex align-items-center btn-warning" to="/signUp">Sign up</Link>
+                </div>
               </>
             }
           </div>

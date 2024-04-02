@@ -13,6 +13,8 @@ h2{
     align-items: center;
     padding: 15px;
     position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .bg::before{
@@ -30,20 +32,23 @@ h2{
 
 .login{
     z-index:1;
-    width: 500px;
-    height: 515px;
     border-radius: 5px;
     background: rgb(249, 249, 249);
     overflow: hidden;
     padding:  30px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     display: flex;
- 
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    width: 27rem;
 }
+@media (max-width: 575.98px) {
+    .login{
+        width: 20rem;
+    }
+ }
 
 .wrapInput {
     width: 100%;

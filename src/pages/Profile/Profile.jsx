@@ -35,13 +35,13 @@ function Profile() {
   return (
     <>
   
-  <h6 className="m-b-20 pb-2 pt-2 fw-semibold border-bottom ">Information</h6>
+  <h6 className="m-b-20 pb-2 pt-2 fw-semibold border-bottom">Information</h6>
   <div className="row gap-4">
-    <div className="col-sm-5">
+    <div className="col-5">
       <p className="fw-bold">Name</p>
       <h6 className="text-muted fw-bolder">{user.userName}</h6>
     </div>
-    <div className="col-sm-6">
+    <div className="col-6">
       <p className="fw-bold">Email</p>
       <h6 className="text-muted f-w-400">{user.email}</h6>
     </div>

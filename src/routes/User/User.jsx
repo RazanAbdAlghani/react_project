@@ -37,10 +37,10 @@ function User() {
   }
   return (
     <>
-      <div className="container vh-100 ">
-        <div className={`${Styles.card}  mt-3 d-flex flex-nowrap`}>
+      <div className="container ">
+        <div className={`${Styles.card}card border shadow  mt-3 d-flex flex-nowrap`}>
           {/*Navbar section */}
-          <div className='col-4 shadow d-flex flex-column justify-content-start align-items-center rounded p-3 gap-4 card'>
+          <div className='col-4 shadow d-flex flex-column justify-content-start align-items-center p-3 gap-4 '>
             <img src={user.image.secure_url} className={`${Styles.userImage} img-fluid`} alt="user image" />
             <h3 className="text-secondary">{user.userName}</h3>
             <ul className="nav flex-column gap-3 align-items-center ">
@@ -53,14 +53,12 @@ function User() {
               <li className="nav-item ">
                 <NavLink className="nav-link link-secondary " style={{ color: "#ffffffd3" }} to="/profile/order">Orders</NavLink>
               </li>
-
             </ul>
-
           </div>
-
+          
           {/*outlet */}
           <div className="col-8 bg-body-tertiary">
-            <div className="card-block">
+            <div className="card-block p-4 ">
               <Outlet />
             </div>
           </div>

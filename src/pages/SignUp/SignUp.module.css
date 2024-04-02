@@ -13,6 +13,8 @@ h2{
     align-items: center;
     padding: 15px;
     position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .bg::before{
@@ -30,17 +32,17 @@ h2{
 
 .register{
     z-index:1;
-    width: 500px;
     border-radius: 5px;
     background: rgb(249, 249, 249);
     overflow: hidden;
-        padding: 55px;
+    padding:  30px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    width: 30rem;
 }
 
 .wrapInput {
@@ -87,3 +89,9 @@ h2{
 .registerBtn:hover {
     background-color: #562e10;
 }
+
+@media (max-width: 575.98px) {
+    .register{
+        width: 20rem;
+    }
+ }

@@ -128,7 +128,7 @@ function Order() {
   return (
     <>
       <div className="">
-        <div className={`${Styles.card}  mt-3`}>
+        <div className={`${Styles.card} mt-3`}>
           <div className="row flex-nowrap">
             {/* cart */}
             <div className={`col-7 ${Styles.cart}`}>

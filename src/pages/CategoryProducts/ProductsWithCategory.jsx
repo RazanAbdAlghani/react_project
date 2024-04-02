@@ -12,7 +12,7 @@ function ProductsWithCategory() {
   const [products, setProducts] = useState([]);
   const { error, setError } = useState('');
   const [loader, setLoader] = useState(true);
-  const {userName ,totalPrice, setTotalPrice,setCount ,count}= useContext(UserContext);
+  const { userName, totalPrice, setTotalPrice, setCount, count } = useContext(UserContext);
   const [isloading, setIsLoading] = useState(false);
   const getProductsWithCategory = async () => {
     try {
@@ -23,7 +23,7 @@ function ProductsWithCategory() {
     } catch (error) {
       console.log(error);
       setError('Error to Loade Data!');
-    }finally{
+    } finally {
       setLoader(false);
     }
   };
@@ -32,67 +32,67 @@ function ProductsWithCategory() {
     getProductsWithCategory();
   }, []);
 
-  const addToCart= async(productId, price)=>{
+  const addToCart = async (productId, price) => {
     const token = localStorage.getItem('userToken');
     setIsLoading(true);
-    try{
-    const {data}= await axios.post(`${import.meta.env.VITE_API_URL}/cart`,{
-      productId
-    },{
-      headers:{
-        Authorization:`Tariq__${token}`
-      }
-    });
-    // console.log(data);
-    localStorage.setItem("countNum",data.cart.products.length);
-    setCount(data.cart.products.length);
-  }catch(error){
-    toast.error(error.response.data.message, {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
+    try {
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/cart`, {
+        productId
+      }, {
+        headers: {
+          Authorization: `Tariq__${token}`
+        }
       });
-  }finally{
-    setIsLoading(false);
-  }
+      // console.log(data);
+      localStorage.setItem("countNum", data.cart.products.length);
+      setCount(data.cart.products.length);
+    } catch (error) {
+      toast.error(error.response.data.message, {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
-  if(loader){
+  if (loader) {
     return <Loader />
   }
   return (
     <>
       <div className="container">
         <h2>{localStorage.getItem("category")}</h2>
-        <div className="d-flex flex-sm-wrap flex-md-nowrap justify-content-center align-item-center gap-3">
+        <div className="d-flex flex-wrap flex-md-nowrap justify-content-center align-item-center gap-3">
           {products.length ?
             products.map(product =>
               /*single product */
-              <div className={Styles.cardHov}  key={product._id}>
-              < div className="card col-3 shadow" style={{width: "18rem"}}>
-                <img src={product.mainImage.secure_url} style={{height:"250px"}} className="card-img-top" alt="product image" />
-                <div className='card-body p-3 d-flex flex-column align-items-center'>
-            
-                  <h5 className="card-title">{product.name}</h5>
-                  <div className="d-flex gap-2">
-                    <p className="text-decoration-line-through text-danger fw-medium">${product.price}</p>
-                    <p className="fw-medium">${product.finalPrice}</p>
+              <div className={Styles.cardHov} key={product._id}>
+                < div className="card col-3 shadow" style={{ width: "18rem" }}>
+                  <img src={product.mainImage.secure_url} style={{ height: "250px" }} className="card-img-top" alt="product image" />
+                  <div className='card-body p-3 d-flex flex-column align-items-center'>
+
+                    <h5 className="card-title">{product.name}</h5>
+                    <div className="d-flex gap-2">
+                      <p className="text-decoration-line-through text-danger fw-medium">${product.price}</p>
+                      <p className="fw-medium">${product.finalPrice}</p>
+                    </div>
+                    <button className={Styles.btn}><Link className="text-light link-underline-light link-underline-opacity-0" to={`/products/${product._id}`}>Show</Link></button>
+
+                    {userName ?
+                      <button className="btn btn-sm  p-2 d-flex align-items-center justify-content-center text-light btn-warning rounded-pill" style={{ width: "140px" }} onClick={() => addToCart(product._id, product.finalPrice)} disabled={isloading ? 'disabled' : null}>{isloading ? "..." : "Add to cart"}</button>
+                      :
+                      null
+                    }
                   </div>
-                  <button className={Styles.btn}><Link className="text-light link-underline-light link-underline-opacity-0" to={`/products/${product._id}`}>Show</Link></button>
-                 
-                  {userName ?
-                    <button className="btn btn-sm  p-2 d-flex align-items-center justify-content-center text-light btn-warning rounded-pill" style={{ width: "140px" }} onClick={() => addToCart(product._id, product.finalPrice)} disabled={isloading ? 'disabled' : null}>{isloading ? "...": "Add to cart"}</button>
-                    :
-                    null
-                  }
                 </div>
-              </div>
               </div>
             )
             :
